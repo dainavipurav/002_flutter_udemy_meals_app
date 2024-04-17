@@ -16,11 +16,14 @@ class MealScreen extends StatelessWidget {
   Widget build(context) {
     Widget content = ListView.builder(
       itemBuilder: (context, index) {
-        return Text(
-          meals[index].title,
-          style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                color: Theme.of(context).colorScheme.onBackground,
-              ),
+        return Padding(
+          padding: const EdgeInsets.symmetric(vertical: 10),
+          child: Text(
+            '${index + 1}. ${meals[index].title}',
+            style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                  color: Theme.of(context).colorScheme.onBackground,
+                ),
+          ),
         );
       },
       itemCount: meals.length,
@@ -52,7 +55,10 @@ class MealScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text(title),
       ),
-      body: content,
+      body: Padding(
+        padding: const EdgeInsets.all(20),
+        child: content,
+      ),
     );
   }
 }
