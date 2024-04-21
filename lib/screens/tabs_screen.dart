@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:udemy_005_meals_app/screens/categories_screen.dart';
 import 'package:udemy_005_meals_app/screens/meals_screen.dart';
+import 'package:udemy_005_meals_app/widgets/main_drawer.dart';
 
 import '../models/meal.dart';
 
@@ -66,6 +67,7 @@ class _TabsScreenState extends State<TabsScreen> {
         title: Text(activePageTitle),
       ),
       body: activePage,
+      drawer: MainDrawer(),
       bottomNavigationBar: BottomNavigationBar(
         onTap: _selectPage,
         currentIndex: _selectedPageIndex,
