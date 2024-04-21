@@ -3,10 +3,12 @@ import 'package:udemy_005_meals_app/dummy_data.dart';
 import 'package:udemy_005_meals_app/models/category.dart';
 import 'package:udemy_005_meals_app/widgets/category_item.dart';
 
+import '../models/meal.dart';
 import 'meals_screen.dart';
 
 class CategoriesScreen extends StatelessWidget {
-  const CategoriesScreen({super.key});
+  final void Function(Meal meal) onToggleFavorite;
+  const CategoriesScreen({super.key, required this.onToggleFavorite});
 
   void _onSelectCategory(Category category, BuildContext ctx) {
     final filteredList = dummyMeals
@@ -20,6 +22,7 @@ class CategoriesScreen extends StatelessWidget {
           return MealScreen(
             title: category.title,
             meals: filteredList,
+            onToggleFavorite: onToggleFavorite,
           );
         },
       ),
