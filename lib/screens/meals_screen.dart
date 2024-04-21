@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:udemy_005_meals_app/widgets/meal_item.dart';
 
 import '../models/meal.dart';
 
@@ -16,14 +17,8 @@ class MealScreen extends StatelessWidget {
   Widget build(context) {
     Widget content = ListView.builder(
       itemBuilder: (context, index) {
-        return Padding(
-          padding: const EdgeInsets.symmetric(vertical: 10),
-          child: Text(
-            '${index + 1}. ${meals[index].title}',
-            style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                  color: Theme.of(context).colorScheme.onBackground,
-                ),
-          ),
+        return MealItem(
+          meal: meals[index],
         );
       },
       itemCount: meals.length,
@@ -55,10 +50,7 @@ class MealScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text(title),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(20),
-        child: content,
-      ),
+      body: content,
     );
   }
 }
