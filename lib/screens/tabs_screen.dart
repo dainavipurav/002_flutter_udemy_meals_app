@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:udemy_005_meals_app/screens/categories_screen.dart';
+import 'package:udemy_005_meals_app/screens/filters_screen.dart';
 import 'package:udemy_005_meals_app/screens/meals_screen.dart';
 import 'package:udemy_005_meals_app/widgets/main_drawer.dart';
 
@@ -24,6 +25,22 @@ class _TabsScreenState extends State<TabsScreen> {
         content: Text(message),
       ),
     );
+  }
+
+  void _setScreen(String identifier) {
+    if (identifier == 'filters') {
+     Navigator.pop(context);
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) {
+            return const FiltersScreen();
+          },
+        ),
+      );
+    } else {
+      Navigator.pop(context);
+    }
   }
 
   void _toggleMealFavorite(Meal meal) {
@@ -67,7 +84,9 @@ class _TabsScreenState extends State<TabsScreen> {
         title: Text(activePageTitle),
       ),
       body: activePage,
-      drawer: MainDrawer(),
+      drawer: MainDrawer(
+        setScreen: _setScreen,
+      ),
       bottomNavigationBar: BottomNavigationBar(
         onTap: _selectPage,
         currentIndex: _selectedPageIndex,
