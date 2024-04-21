@@ -27,10 +27,10 @@ class _TabsScreenState extends State<TabsScreen> {
     );
   }
 
-  void _setScreen(String identifier) {
+  void _setScreen(String identifier) async {
     if (identifier == 'filters') {
-     Navigator.pop(context);
-      Navigator.push(
+      Navigator.pop(context);
+      final result = await Navigator.push<Map<Filters, bool>>(
         context,
         MaterialPageRoute(
           builder: (context) {
@@ -38,6 +38,8 @@ class _TabsScreenState extends State<TabsScreen> {
           },
         ),
       );
+
+      print(result);
     } else {
       Navigator.pop(context);
     }
