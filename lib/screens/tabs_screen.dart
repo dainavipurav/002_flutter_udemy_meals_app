@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:udemy_005_meals_app/dummy_data.dart';
+import 'package:udemy_005_meals_app/data/dummy_data.dart';
 import 'package:udemy_005_meals_app/screens/categories_screen.dart';
 import 'package:udemy_005_meals_app/screens/filters_screen.dart';
 import 'package:udemy_005_meals_app/screens/meals_screen.dart';
