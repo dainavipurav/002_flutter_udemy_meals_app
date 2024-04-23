@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:udemy_005_meals_app/providers/favorite_meals_provider.dart';
 import 'package:udemy_005_meals_app/providers/meals_provider.dart';
 import 'package:udemy_005_meals_app/screens/categories_screen.dart';
 import 'package:udemy_005_meals_app/screens/filters_screen.dart';
 import 'package:udemy_005_meals_app/screens/meals_screen.dart';
 import 'package:udemy_005_meals_app/widgets/main_drawer.dart';
-
-import '../models/meal.dart';
 
 const kInitialFilters = {
   Filters.gltenFree: false,
@@ -31,17 +30,6 @@ class _TabsScreenState extends ConsumerState<TabsScreen> {
     Filters.vegetarian: false,
   };
 
-  final List<Meal> _favoriteMeals = [];
-
-  void _showInfoMessage(String message) {
-    ScaffoldMessenger.of(context).removeCurrentSnackBar();
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(message),
-      ),
-    );
-  }
-
   void _setScreen(String identifier) async {
     if (identifier == 'filters') {
       Navigator.pop(context);
@@ -61,21 +49,6 @@ class _TabsScreenState extends ConsumerState<TabsScreen> {
       });
     } else {
       Navigator.pop(context);
-    }
-  }
-
-  void _toggleMealFavorite(Meal meal) {
-    final isExists = _favoriteMeals.contains(meal);
-    if (isExists) {
-      setState(() {
-        _favoriteMeals.remove(meal);
-      });
-      _showInfoMessage('Meal is no longer a favorite');
-    } else {
-      setState(() {
-        _favoriteMeals.add(meal);
-      });
-      _showInfoMessage('Marked as a favorite');
     }
   }
 
@@ -105,15 +78,14 @@ class _TabsScreenState extends ConsumerState<TabsScreen> {
     }).toList();
 
     Widget activePage = CategoriesScreen(
-      onToggleFavorite: _toggleMealFavorite,
       availableMeals: availableMeals,
     );
     String activePageTitle = 'Categories';
 
     if (_selectedPageIndex == 1) {
+      final favoriteMeals = ref.watch(favoriteMealsProvider);
       activePage = MealScreen(
-        meals: _favoriteMeals,
-        onToggleFavorite: _toggleMealFavorite,
+        meals: favoriteMeals,
       );
       activePageTitle = 'Your Favorites';
     }
