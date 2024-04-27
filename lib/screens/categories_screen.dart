@@ -59,9 +59,22 @@ class _CategoriesScreenState extends State<CategoriesScreen>
       body: AnimatedBuilder(
         animation: _animationController,
         builder: (context, child) {
-          return Padding(
-            padding: EdgeInsets.only(
-              top: 100 - _animationController.value * 100,
+          // ### Explicit Animation basic 1 ###
+          // return Padding(
+          //   padding: EdgeInsets.only(
+          //     top: 100 - _animationController.value * 100,
+          //   ),
+          //   child: child,
+          // );
+
+          // ### Explicit Animation basic 2 ###
+          return SlideTransition(
+            position: _animationController.drive(
+              Tween(
+                begin: const Offset(0,
+                    0.3), // child takes 30% below of actual position in Y axis
+                end: const Offset(0, 0), // child Takes default position
+              ),
             ),
             child: child,
           );
