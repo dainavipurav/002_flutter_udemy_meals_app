@@ -68,12 +68,26 @@ class _CategoriesScreenState extends State<CategoriesScreen>
           // );
 
           // ### Explicit Animation basic 2 ###
+          // return SlideTransition(
+          //   position: _animationController.drive(
+          //     Tween(
+          //       begin: const Offset(0,
+          //           0.3), // child takes 30% below of actual position in Y axis
+          //       end: const Offset(0, 0), // child Takes default position
+          //     ),
+          //   ),
+          //   child: child,
+          // );
+
+          // ### Explicit Animation basic 3 ###
           return SlideTransition(
-            position: _animationController.drive(
-              Tween(
-                begin: const Offset(0,
-                    0.3), // child takes 30% below of actual position in Y axis
-                end: const Offset(0, 0), // child Takes default position
+            position: Tween(
+              begin: const Offset(0, 0.3),
+              end: const Offset(0, 0),
+            ).animate(
+              CurvedAnimation(
+                parent: _animationController,
+                curve: Curves.easeInOut,
               ),
             ),
             child: child,
