@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:transparent_image/transparent_image.dart';
 import 'package:udemy_005_meals_app/models/meal.dart';
 import 'package:udemy_005_meals_app/widgets/meal_item_trait.dart';
@@ -23,16 +24,19 @@ class MealItem extends StatelessWidget {
         },
         child: Stack(
           children: [
-            FadeInImage(
-              placeholder: MemoryImage(
-                kTransparentImage,
+            Hero(
+              tag: meal.id,
+              child: FadeInImage(
+                placeholder: MemoryImage(
+                  kTransparentImage,
+                ),
+                image: NetworkImage(
+                  meal.imageUrl,
+                ),
+                height: 200,
+                width: double.infinity,
+                fit: BoxFit.cover,
               ),
-              image: NetworkImage(
-                meal.imageUrl,
-              ),
-              height: 200,
-              width: double.infinity,
-              fit: BoxFit.cover,
             ),
             Positioned(
               left: 0,
